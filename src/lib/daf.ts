@@ -1,9 +1,11 @@
 import { HDate } from '@hebcal/core'
 import { DafYomi } from '@hebcal/learning'
+import { gematriya } from '@hebcal/core'
 
 export interface DafYomiInfo {
   masechta: string // For dafyomi.org URL (e.g., "Berachos")
   daf: string // e.g. "2"
+  hebDaf: string // e.g. "ב"
   hebrewName: string // e.g. "ברכות ב"
   englishName: string // e.g. "Berachot"
   date: string // e.g. "2023-10-25"
@@ -60,13 +62,14 @@ export function getTodaysDaf(): DafYomiInfo {
   
   const masekhetName = daf.name
   const blatt = daf.blatt.toString()
-  
+  debugger;
   // daf.name from hebcal is like "Bava Kamma"
   const urlMesechta = MESECHTA_MAP[masekhetName] || masekhetName.replace(/\s+/g, '')
   
   return {
     masechta: urlMesechta,
-    daf: blatt,
+    daf: blatt, // Convert to Hebrew letters
+    hebDaf: gematriya(blatt), // Convert to Hebrew letters
     hebrewName: daf.render('he'), 
     englishName: masekhetName,
     date: now.greg().toISOString().split('T')[0]

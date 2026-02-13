@@ -12,54 +12,60 @@ export function DafViewer() {
   }, [])
 
   if (!dafInfo) {
-    return <div className="text-center p-10">טוען דף יומי...</div>
+    return <div className="p-10 text-center">טוען דף יומי...</div>
   }
 
   // Parse Hebrew name to separate Tractate and Daf if possible, or just use it
   // dafInfo.hebrewName is typically "מסכת דף" (e.g. "ברכות ב")
-  const parts = dafInfo.hebrewName.split(' ')
-  const hebrewMasechta = parts.slice(0, parts.length - 1).join(' ')
-  const hebrewDaf = parts[parts.length - 1]
 
+  const hebrewMasechta = dafInfo.hebrewName.split("דף")?.[0]?.trim() || dafInfo.hebrewName
   return (
     <div className="flex flex-col gap-6">
-        {/* Banner / Current Tractate Info */}
-        <div className="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white shadow-lg">
-             <div className="flex items-center justify-between">
-                 <div className="text-right">
-                     <p className="text-sm font-medium opacity-80 mb-1">דף</p>
-                     <h2 className="text-6xl font-extrabold tracking-tighter">{dafInfo.daf}</h2>
-                 </div>
-                 <div className="text-left">
-                     <p className="text-sm font-medium opacity-80 mb-1">מסכת</p>
-                     <h2 className="text-4xl font-extrabold tracking-tight">{hebrewMasechta || dafInfo.hebrewName}</h2>
-                 </div>
-             </div>
+      {/* Banner / Current Tractate Info */}
+      <div className="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white shadow-lg">
+        <div className="flex items-center justify-between">
+          <div className="text-right">
+            <p className="mb-1 text-sm font-medium opacity-80">מסכת</p>
+            <h2 className="text-6xl font-extrabold tracking-tighter">
+              {hebrewMasechta}
+            </h2>
+          </div>
+          <div className="text-left">
+            <p className="mb-1 text-sm font-medium opacity-80">דף</p>
+            <h2 className="text-6xl font-extrabold tracking-tighter">
+              {dafInfo.hebDaf}
+            </h2>
+          </div>
         </div>
+      </div>
 
-        {/* Viewer */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-             <Card className="overflow-hidden shadow-sm border-0">
-                 <CardContent className="p-0 aspect-[2/3] relative bg-white dark:bg-zinc-900 border rounded-t-lg">
-                     <img 
-                        src={`https://www.dafyomi.org/edafnew/${dafInfo.masechta}/${dafInfo.daf}a.jpg`} 
-                        alt={`${dafInfo.englishName} ${dafInfo.daf}a`}
-                        className="w-full h-full object-contain"
-                     />
-                 </CardContent>
-                 <div className="p-3 text-center text-sm font-medium border-x border-b rounded-b-lg bg-background">עמוד א</div>
-             </Card>
-             <Card className="overflow-hidden shadow-sm border-0">
-                 <CardContent className="p-0 aspect-[2/3] relative bg-white dark:bg-zinc-900 border rounded-t-lg">
-                     <img 
-                        src={`https://www.dafyomi.org/edafnew/${dafInfo.masechta}/${dafInfo.daf}b.jpg`} 
-                        alt={`${dafInfo.englishName} ${dafInfo.daf}b`}
-                        className="w-full h-full object-contain"
-                     />
-                 </CardContent>
-                 <div className="p-3 text-center text-sm font-medium border-x border-b rounded-b-lg bg-background">עמוד ב</div>
-             </Card>
-        </div>
+      {/* Viewer */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+        <Card className="overflow-hidden border-0 shadow-sm">
+          <CardContent className="relative aspect-[2/3] rounded-t-lg border bg-white p-0 dark:bg-zinc-900">
+            <img
+              src={`https://www.dafyomi.org/edafnew/${dafInfo.masechta}/${dafInfo.daf}a.jpg`}
+              alt={`${dafInfo.englishName} ${dafInfo.daf}a`}
+              className="h-full w-full object-contain"
+            />
+          </CardContent>
+          <div className="bg-background rounded-b-lg border-x border-b p-3 text-center text-sm font-medium">
+            עמוד א
+          </div>
+        </Card>
+        <Card className="overflow-hidden border-0 shadow-sm">
+          <CardContent className="relative aspect-[2/3] rounded-t-lg border bg-white p-0 dark:bg-zinc-900">
+            <img
+              src={`https://www.dafyomi.org/edafnew/${dafInfo.masechta}/${dafInfo.daf}b.jpg`}
+              alt={`${dafInfo.englishName} ${dafInfo.daf}b`}
+              className="h-full w-full object-contain"
+            />
+          </CardContent>
+          <div className="bg-background rounded-b-lg border-x border-b p-3 text-center text-sm font-medium">
+            עמוד ב
+          </div>
+        </Card>
+      </div>
     </div>
   )
 }
