@@ -29,6 +29,8 @@
     "analyze": "ANALYZE=true pnpm build"
   },
   "dependencies": {
+    "@hebcal/core": "^6.0.8",
+    "@hebcal/learning": "^6.6.1",
     "@radix-ui/react-checkbox": "^1.3.1",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-label": "^2.1.6",
@@ -46,6 +48,7 @@
     "next": "^16.1.1",
     "next-themes": "^0.4.6",
     "nextjs-toploader": "^3.9.17",
+    "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwind-merge": "^3.4.0"

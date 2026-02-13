@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
-import NextTopLoader from 'nextjs-toploader'
 import { Analytics } from '@vercel/analytics/react'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './globals.css'
@@ -13,8 +12,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'Limmud Yomi - Jewish Daily Learning',
+  description: 'Track your daily Torah learning progress with Limmud Yomi.',
 }
 
 const geistSans = Geist({
@@ -29,9 +28,8 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <NextTopLoader showSpinner={false} height={2} color="#2acf80" />
+    <html lang="he" dir="rtl" suppressHydrationWarning>
+      <body className={`${geistSans.className} antialiased bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
